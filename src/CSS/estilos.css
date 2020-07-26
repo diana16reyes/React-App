@@ -1,0 +1,263 @@
+html{
+
+    background: #B993D6;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #8CA6DB, #B993D6);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #8CA6DB, #B993D6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+color: black;   
+}
+.uk-table th{
+
+color: peachpuff;
+
+font-weight: bold;
+
+}
+
+th .rose{
+
+    color: peachpuff;
+}
+
+.fa-female:hover{
+
+    color: deeppink;
+}
+.fa-male:hover{
+
+    color: deepskyblue;
+}
+h6{
+    color: ivory;
+}
+
+
+.titulo{
+    margin: auto;
+    margin-top: 50px;
+    width: 300px;
+    text-align: center;
+
+}
+
+.titulo h3{
+    letter-spacing: 2px;
+    color: white;
+}
+
+.info
+{
+    color: crimson;
+    cursor: pointer;
+}
+
+.componente{
+background-color: transparent;
+border: solid coral;
+width: 1100px;
+height: 750px;
+margin-top: 10px;
+margin: auto;
+display: grid;
+grid-template-columns: 350px 350px 350px;
+grid-template-rows: 675px 675px 675px ;
+position: relative;
+
+
+}
+
+.columna1{
+
+background-color:transparent;
+margin-top: 50px;
+margin-left: 50px;
+/* border: solid mediumseagreen; */
+/* box-shadow: 5px 5px 10px mediumseagreen; */
+}
+
+.panel-v{
+ /* background-color: mediumseagreen ;   */
+ width: 295px;
+ height: 200px;
+
+}
+
+
+.img1{
+background-size: cover;
+border: solid mediumseagreen;
+border-radius: 25px 5px 50px 50px;
+width: 100px;
+height: 100px;
+position: absolute;
+left: 1rem;
+top: 2rem;
+}
+
+.img2{
+    background-size: cover;
+    border: solid cornflowerblue;
+    border-radius: 25px 5px 50px 50px;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 23rem;
+    top:2rem;
+    }
+
+.img3{
+    background-size: cover;
+    border: solid orange;
+    border-radius: 25px 5px 50px 50px;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 45rem;
+    top: 2rem;
+    }
+
+
+.basico{
+
+background-color: white;
+width: 245px;
+height: 40px;
+margin-left: 50px;
+text-align: center;
+
+
+}
+
+
+.panel-v h3{
+letter-spacing: 2px;   
+color: white;
+margin-top: 20px;
+margin-left: 70px;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.precio{
+color: white;
+margin-left: 3px;
+font-weight: lighter;
+}
+
+
+.proyect{
+
+color: white;
+margin-left: 60px;
+
+}
+.icon1{
+margin-top: 25px;
+text-align: center;
+
+}
+
+/* .fa-hdd-o{
+color: mediumseagreen;
+} */
+
+.icon2{
+    margin-top: 25px;
+    text-align: center;
+}    
+
+.world{
+
+color: mediumseagreen;
+}
+
+
+.icon3{
+    margin-top: 25px;
+    text-align: center;
+}   
+
+.fa-envelope{
+color: mediumseagreen;
+
+}
+
+.fa-shield{
+color: mediumseagreen;  
+}
+
+
+.boton{
+margin-left: 80px;
+
+}
+/* 
+.uk-button-default{
+background-color: mediumseagreen;
+color: white;
+} */
+
+
+
+
+.uk-navbar-container:not(.uk-navbar-transparent){
+
+background-color: #282c34;
+}
+
+.uk-logo,.uk-nabvar-nav>li>a{
+color: white;
+}
+
+
+
+.error
+{
+    text-align: center
+}
+
+.error p
+{
+    font-size:22px;
+    
+}
+
+.error h3
+{
+    color: crimson;
+    text-transform: uppercase;
+}
+
+.error img{
+width:  500px;
+
+
+}
+
+
+
+.cuerpo{
+
+width:700px ;
+height:900px;
+margin: auto;
+background-color: transparent;
+
+}
+
+.mycard{
+margin: auto;
+top: 68px;
+}
+
+.datos{
+background-color: papayawhip;
+}
+
+.gustos{
+background-color: lightpink;
+}
+
+.utvt{
+background-color: plum;
+}
+
