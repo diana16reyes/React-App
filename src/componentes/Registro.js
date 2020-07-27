@@ -1,4 +1,7 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
+// expreciones regulares e inregulares
 
 const textoRegex =RegExp(/^[a-zA-Z, ,ÑñÁáÉéÍíÓóÚúÜü]+$/);
 const telefonoRegex =RegExp(/^[0-9]{3}[-. ][0-9]{3}[-. ][0-9]{4}$/);
@@ -21,6 +24,7 @@ return valid;
 }
 
 class Resgistro extends React.Component{
+    
 
 state={
 
@@ -31,34 +35,48 @@ telefono:null,
 correo:null,
 contra:null,
 recontra:null,
+marca:null,
 modelo:null,
-año:null,
 sexo:null,
 comentario:null,
-genero:"OTRO",
+genero:'otro',
 placa:null,
-status:null,
+status:'',
+foto:"img/user.png",
+marcas:[],
+modelos:[],
 
-errores:{ 
-nombre:"",
-apep:"",
-apem:"",
-telefono:"",
-correo:"",
-contra:"",
-recontra:"",
-modelo:"",
-año:"",
-sexo:"",
-comentario:"",
-genero:"",
-placa:""
+    errores:{ 
+    nombre:"",
+    apep:"",
+    apem:"",
+    telefono:"",
+    correo:"",
+    contra:"",
+    recontra:"",
+    marca:"",
+    modelo:"",
+    sexo:"",
+    comentario:"",
+    genero:"",
+    placa:"",
 
-
+    }
 
 }
 
+componentDidMount(){
+
+
+    fetch("http://localhost/api/public/api/showMarcas")//recibir la api 
+    .then(response => response.json())
+    .then(showMarcas => this.setState({marcas:showMarcas}))
+
+    fetch("http://localhost/api/public/api/showModelos")//recibir la api 
+    .then(response => response.json())
+    .then(showModelos => this.setState({modelos:showModelos}))
 }
+
 
 
 handleChange =e => {
@@ -112,15 +130,15 @@ switch(name){
         :"Vuelve a introducir la contraseña"; 
     break;
 
-    case "modelo":
-        errores.modelo = value===""
+    case "marca":
+        errores.marca = value===""
         ? "Selecciona al menos un valor" 
         :""; 
     break;
 
 
-    case "año":
-        errores.año = value===""
+    case "modelo":
+        errores.modelo = value===""
         ? "Selecciona al menos un valor" 
         :""; 
     break;
@@ -155,7 +173,7 @@ switch(name){
 
     
     case "comentario":
-        errores.comentario = value.length>123
+        errores.comentario = value.length>123 //evaluar la longitud
         ? "Maximo 123 caracteres" 
         :""; 
     break;
@@ -173,72 +191,130 @@ this.setState({errores,[name]:value})
 }
 
 
+    handleSubmit=e=>{
+    e.preventDefault();
+
+    if(formValid(this.state))
+
+    {
+
+        let data= {
+
+            foto: this.state.foto,
+            name: this.state.nombre,
+            apellidop: this.state.apep,
+            apellidom: this.state.apem,
+            sexo: this.state.sexo,
+            genero: this.state.genero,
+            telefono: this.state.telefono,
+            email: this.state.correo,
+            password: this.state.contra,
+            placa: this.state.placa,
+            comentario: this.state.comentario,
+            marca_id: this.state.marca,
+            modelo_id: this.state.modelo
+        }
+
+        fetch("http://localhost/api/public/api/newStore",
+        {
+            method:"POST",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            mode: "cors",
+            body: JSON.stringify(data)
+        })
+
+        .then(response =>response.json())
+        .then(this.setState({status: "Alta Exitosa"}))
+
+    }
+
+    else{
+
+    this.setState({status:"Corregir la información"})
+
+    }
 
 
+    }
 
-handleSubmit=e=>{
-e.preventDefault();
+    notSubmit=e=>{
 
-if(formValid(this.state))
+        e.preventDefault();
+    }
 
-{
-
-console.log(`
-
-LISTO PARA PRODUCCION
-Nombre:${this.state.nombre}
-Correo:${this.state.correo}
-Telefono:${this.state.telefono}
-
-`)
-
-
-this.setState({status:"Formulario valido"})
-
-}
-
-else{
-
-this.setState({status:"Corregir la información"})
-
-}
-
-
-}
-
-
-
-
-  
 
     render(){
 
 
-         const{errores} = this.state
+         const{errores,foto,marcas,modelos} = this.state
  
             return(
-            <div> 
+                
+        <div className="uk-flex uk-flex-center"> 
 
-            <form onSubmit ={this.handleSubmit} noValidate>
+            <Link className="uk-align-left" to="/Reporte">
+                <i className="fa fa-chevron-circle-left fa-3x" aria-hidden="true"></i>
+            </Link>
 
-            <div className="uk-flex uk-flex-center">
-
-                <div>
-
-                    <div className="uk-card uk-card-default uk-width-large">
-                        <div className="uk-card-header">
-                            <div className="uk-grid-small uk-flex-middle">
-                                <div className="uk-width-auto">
-                                    <img className="uk-border-circle" width="150" height="150" src="img/user.png" alt="user"/>
-                                </div>
+            <div>
+    
+            <form onSubmit={this.notSubmit} noValidate>
 
 
-                                <div className="uk-width-expand">
-                                    <h4 className="uk-card-title uk-margin-remove-bottom"> <strong> Registro </strong></h4>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                <div className="uk-card uk-card-default uk-width-large">
+
+                    <div className="uk-card-header">
+
+                        <div className="uk-grid-small uk-flex-middle">
+
+                    <div className="uk-grid-small uk-grid uk-align-right">
+
+                        <label className="uk-form-label uk-text-bold">Escoge tu avatar...</label>
+                        <br/>
+
+                        <li className="uk-button uk-button-link"> 
+                            <input type="image" name="foto" src="img/vene.jpg" width="40" height="40" alt="vene" value="img/vene.jpg" onClick={this.handleChange}/>
+                        </li>
+
+                        <li className="uk-button uk-button-link"> 
+                            <input type="image" name="foto" src="img/github-1.svg" width="40" height="40" alt="github" value="img/github-1.svg" onClick={this.handleChange}/>
+                       </li>
+
+                       <li className="uk-button uk-button-link"> 
+                         <input type="image" name="foto" src="img/gitlab.svg" width="40" height="40" alt="gitlab" value="img/gitlab.svg" onClick={this.handleChange}/>
+                      </li>
+
+                      <br/>
+
+                      <li className="uk-button uk-button-link"> 
+                         <input type="image" name="foto" src="img/python-5.svg" width="40" height="40" alt="python" value="img/python-5.svg" onClick={this.handleChange}/>
+                      </li>
+
+                      <li className="uk-button uk-button-link"> 
+                         <input type="image" name="foto" src="img/rex.png" width="40" height="40" alt="rex" value="img/rex.png" onClick={this.handleChange}/>
+                      </li>
+
+                      <li className="uk-button uk-button-link"> 
+                         <input type="image" name="foto" src="img/golan.png" width="40" height="40" alt="go" value="img/golan.png" onClick={this.handleChange}/>
+                      </li>
+               </div>
+                  
+               <div className="uk-width-auto">
+                    <img className="uk-border-circle" width="100" height="100" 
+                    src= {foto} alt="user"/>
+                </div>
+
+
+                <div className="uk-width-expand">
+                    <h4 className="uk-card-title uk-margin-remove-bottom">
+                        <strong> Registro </strong>
+                    </h4>                 
+                </div>
+            </div>
+        </div>
 
                         <div className="uk-card-body">
 
@@ -402,43 +478,44 @@ this.setState({status:"Corregir la información"})
 
 
                     <div className="uk-margin">
-                    <label className="uk-form-label">Elije el modelo de auto</label>
+                    <label className="uk-form-label">Elige la marca de tu auto</label>
                     <div className="uk-form-controls">
-                        <select className={errores.modelo.length>0 ? "uk-select  uk-form-danger"
+                        <select className={errores.marca.length>0 ? "uk-select  uk-form-danger"
                                                                      :"uk-select"}
-                         name="modelo" onChange={this.handleChange}>
-                            <option value="">Seleccionar un modelo</option>
-                            <option value="lamborghini">lamborghini</option>
-                            <option value="Chevrolet">Chevrolet</option>                            
+                         name="marca" onChange={this.handleChange}>
+
+                            <option value="">Seleccionar una marca</option>
+                        {marcas.map((marca, i) =>
+                            <option value={marca.marca_id} key={i}>{marca.name}</option>   
+                        )}                        
                         </select>
                     </div>
                    </div>
 
                    
                    <div className="uk-alert-danger uk-margin">
-                   <p>{errores.modelo}</p>
+                   <p>{errores.marca}</p>
                   </div>
 
 
                   <div className="uk-margin">
                   <label className="uk-form-label">Elije el Año del auto</label>
                   <div className="uk-form-controls">
-                      <select className={errores.año.length>0 ? "uk-select  uk-form-danger"
+                      <select className={errores.modelo.length>0 ? "uk-select  uk-form-danger"
                                                                    :"uk-select"}
-                         name="año" onChange={this.handleChange}>
-                          <option value="">Seleccionar un año</option>
-                          <option value="2020">2020</option>
-                          <option value="2019">2019</option> 
-                          <option value="2018">2018</option>     
-                          <option value="2017">2017</option>      
-                          <option value="2016">2016</option> 
-                          <option value="2015">2015</option>                                   
+                         name="modelo" onChange={this.handleChange}>
+                          <option value="">Seleccionar un modelo</option>
+                         
+                          {modelos.map((modelo, i) =>
+                            <option value={modelo.modelo_id} key={i}>{modelo.año}</option>   
+                          )} 
+                          
                       </select>
                   </div>
                  </div>
 
                  <div className="uk-alert-danger uk-margin">
-                 <p>{errores.año}</p>
+                 <p>{errores.modelo}</p>
                 </div>
 
 
@@ -476,10 +553,14 @@ this.setState({status:"Corregir la información"})
                   
 
 
-                   <button className="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Registrar</button>
+                   <button className="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" onClick={this.handleSubmit}>Registrar</button>
 
-                   <div className={this.state.status ==="Formulario valido" ? "uk-alert-success"
-                                                                            : "uk-alert-danger"} >
+                   <div className=
+                        {
+                             this.state.status ==="Alta Exitosa" 
+                                ? "uk-alert-success uk-margin"
+                                : "uk-alert-danger uk-margin"
+                        } >
                         <p className="uk-text-center">{this.state.status}</p>
                   </div>
 
@@ -491,11 +572,10 @@ this.setState({status:"Corregir la información"})
                       
                 </div>
                 
-                </div>
+                
+                </form>
 
             </div>
-
-            </form>
 
             </div>
             )

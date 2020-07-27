@@ -261,3 +261,44 @@ background-color: lightpink;
 background-color: plum;
 }
 
+.fa-user-plus{
+    color: darkorchid;
+}
+
+.fa-venus-mars:hover{
+   color:rgb(245, 134, 43);
+}
+
+.icon-search:hover{
+    background: cornflowerblue;
+    color: #f8f8f8;
+} 
+
+.icon-trash:hover{
+  background-color: orangered;
+  color: #f8f8f8;
+
+}
+
+
+.uk-link, a:hover{
+color: transparent;
+}                          
+
+.icon-x:hover{
+ background-color: crimson;
+ color: #f8f8f8;
+}
+
+
+.uk-card-pink{
+    background-color: pink;
+}
+
+.uk-card-blue{
+    background-color: lightblue;
+
+}
+.uk-card-yellow{
+    background-color: rgb(252, 244, 162);
+}

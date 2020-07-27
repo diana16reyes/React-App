@@ -8,6 +8,10 @@ import Validaciones  from '../pages/Validaciones';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Error from '../pages/Error';
 import ReporteUsuarios from '../pages/ReporteUsuarios';
+import InfUsuarios from '../pages/InfUsuarios';
+import DeleteUser from '../pages/DeleteUser';
+
+
 
 
 function Hosting (){
@@ -85,46 +89,33 @@ return(
 <Switch>
 
 
-    <Route exact path="/">
-     <Biografia/>
-    </Route>
+    <Route exact path="/" component={Biografia}/>
 
 
-    <Route exact path="/Reportes">
-    <Reportes/>
-    </Route>
+    <Route exact path="/Reportes" component={Reportes}/>
+   
+
+    <Route exact path="/Formulario" component={Formulario}/>
+  
+
+    <Route exact path="/Resumen" component={Pagos}/>
+   
+
+    <Route exact path="/Validaciones" component={Validaciones}/>
+   
+
+    <Route exact path="/Reporte" component={ReporteUsuarios}/>
 
 
-    
-    <Route exact path="/Formulario">
-    <Formulario/>
-    </Route>
+    <Route exact path="/InfUsuarios" component={InfUsuarios}/>
 
-    <Route exact path="/Resumen">
-    <Pagos/>
-    </Route>
-
-    <Route exact path="/Validaciones">
-    <Validaciones/>
-    </Route>
-
-    <Route exact path="/Reporte">
-    <ReporteUsuarios/>
-    </Route>
+    <Route exact path="/DeleteUser" component={DeleteUser}/>
 
 
+    <Route path="*" component={Error}/>
 
 
-
-
-
-    
-
-    <Route path="*">
-        <Error/>
-    </Route>
-
-
+      
 
 </Switch>
 
